@@ -19,6 +19,7 @@
 mvnw
 mvnw.cmd
 
+
 ### NetBeans ###
 /nbproject/private/
 /build/
@@ -28,5 +29,3 @@ mvnw.cmd
 /.nb-gradle/
 
 
-/src/blog.sql
-/src/readme.md
