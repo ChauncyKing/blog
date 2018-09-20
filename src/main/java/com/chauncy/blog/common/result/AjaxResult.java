@@ -1,5 +1,6 @@
 package com.chauncy.blog.common.result;
 
+import com.alibaba.fastjson.JSONObject;
 import com.chauncy.blog.common.code.ErrorCode;
 
 import java.io.Serializable;
@@ -105,6 +106,18 @@ public class AjaxResult implements Serializable {
         return new AjaxResult(errorCodeEnum.getErrorCode(), errorCodeEnum.getDescription());
     }
 
+    /**
+     * 请求是否成功
+     * ### 方法名一定不要用 is 开头，否则会被识别成 成员变量返回 ###
+     * @return
+     */
+    public boolean excuteSuccess() {
+        if (SUCCESS_CODE.equals(this.getCode())) {
+            return true;
+        }
+        return false;
+    }
+
     public Integer getCode() {
         return code;
     }
@@ -127,5 +140,10 @@ public class AjaxResult implements Serializable {
 
     public void setData(Object data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return JSONObject.toJSONString(this);
     }
 }

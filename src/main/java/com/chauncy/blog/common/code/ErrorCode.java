@@ -10,7 +10,13 @@ public enum ErrorCode{
     /**
      * 系统错误
      */
-    ERROR_DEFAULT(999999, "系统未知错误");
+    ERROR_DEFAULT(999999, "系统未知错误"),
+
+
+    /**
+     * 短息服务异常 1001-2000
+     */
+    MESSAGE_SERVICE_ERROR(1001,"短信服务异常");
 
     /**
      * 错误码

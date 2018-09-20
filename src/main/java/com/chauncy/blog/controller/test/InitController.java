@@ -35,7 +35,7 @@ public class InitController {
     @ResponseBody
     @GetMapping(value = "/success")
     public AjaxResult success() {
-        return AjaxResult.success("success");
+        return AjaxResult.success();
     }
 
     /**
