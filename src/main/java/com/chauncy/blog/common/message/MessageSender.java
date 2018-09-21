@@ -6,6 +6,7 @@ import com.chauncy.blog.common.message.output.SmsErrorOutput;
 import com.chauncy.blog.common.message.output.SmsLogOutput;
 import com.chauncy.blog.common.message.output.SmsSuccessOutput;
 import com.chauncy.blog.common.result.AjaxResult;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @Component
+@Slf4j
 public class MessageSender {
 
     @Autowired
@@ -109,7 +111,7 @@ public class MessageSender {
             if (httpEntity != null) {
                 // 获取 JSON 字符串格式的请求结果
                 String responseJsonStr = EntityUtils.toString(httpEntity, "UTF-8");
-                //TODO : 日志记录短信请求结果
+                log.info("[短信服务][url:{}][response:{}]", url, responseJsonStr);
                 // JSON 字符串转换成 JSON 对象
                 JSONObject responseJsonObj = JSONObject.parseObject(responseJsonStr);
 
@@ -117,7 +119,8 @@ public class MessageSender {
                 String status = responseJsonObj.getString("status");
                 if (GlobalConsts.ERROR.equals(status)) {
                     SmsErrorOutput output = JSONObject.parseObject(responseJsonStr, SmsErrorOutput.class);
-                    return AjaxResult.error(output.getCode(), "[短信服务异常]" + output.getMsg());
+                    log.error("[短信服务异常][url:{}][response:{}]", url, responseJsonStr);
+                    return AjaxResult.error(output.getCode(), "[短信服务异常] " + output.getMsg());
                 }
                 if (GlobalConsts.SUCCESS.equals(status)) {
                     T output = JSONObject.parseObject(responseJsonStr, clazz);
