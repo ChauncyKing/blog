@@ -1,5 +1,7 @@
 package com.chauncy.blog.common.util;
 
+import com.alibaba.fastjson.JSONObject;
+
 public class StringUtil {
 
     /**
@@ -9,5 +11,11 @@ public class StringUtil {
      */
     public static boolean isNullOrEmpty(String text){
         return text == null || text.trim().isEmpty();
+    }
+
+
+    public static void main(String[] args) {
+        String s = JSONObject.parseObject("abc", String.class);
+        System.out.println(s);
     }
 }
