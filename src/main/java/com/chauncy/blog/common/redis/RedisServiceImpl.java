@@ -8,7 +8,7 @@ import redis.clients.jedis.Jedis;
 /**
  * Redis 操作 API 实现类
  */
-@Service
+@Service("redisService")
 public class RedisServiceImpl implements RedisService {
 
     @Autowired
