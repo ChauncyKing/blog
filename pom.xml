@@ -114,6 +114,13 @@
             <artifactId>jedis</artifactId>
         </dependency>
 
+        <!-- alipay 沙箱支付 SDK-->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
