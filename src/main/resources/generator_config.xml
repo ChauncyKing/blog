@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!-- 导入属性配置文件 -->
+    <properties resource="datasource.properties"/>
+
+    <context id="default" targetRuntime="MyBatis3">
+        <!-- 指定生成的java文件的编码,没有直接生成到项目时中文可能会乱码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 对注释进行控制，生成代码时不生成注释。suppress:禁止 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--1.JDBC的数据库连接 -->
+        <jdbcConnection
+                driverClass="${db.driverClassName}"
+                connectionURL="${db.url}"
+                userId="${db.username}"
+                password="${db.password}">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--2.JavaModel的配置-->
+        <javaModelGenerator targetPackage="com.chauncy.blog.entity" targetProject="src/main/java">
+            <!-- 是否允许子包，即 targetPackage.schemaName.tableName -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 是否添加含有所有成员变量的构造函数，设置为 true后，会生成无参的和含有所有参数的构造方法 -->
+            <property name="constructorBased" value="true"/>
+            <!-- set方法会对字符串进行 trim()操作 -->
+            <property name="trimStrings" value="false"/>
+            <!-- 建立的 Model对象是否不可改变，如果是指为true，则只有get方法，没有set方法 -->
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+
+        <!--3.SqlMap的配置-->
+        <sqlMapGenerator targetPackage="com.chauncy.blog.dao.mapper" targetProject="src/main/java">
+            <!--在targetPackage的基础上，根据数据库的schema再生成一层package，默认为 false-->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!--4.Mapper接口的配置-->
+        <!--
+            1，ANNOTATEDMAPPER：会生成使用Mapper接口+Annotation的方式创建（SQL生成在annotation中），不会生成对应的XML；
+            2，MIXEDMAPPER：使用混合配置，会生成 Mapper接口，并适当添加合适的Annotation，但是XML会生成在XML中；
+            3，XMLMAPPER：会生成Mapper接口，接口完全依赖XML；
+            注意，如果context是MyBatis3Simple：则只支持ANNOTATEDMAPPER 和 XMLMAPPER
+        -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.chauncy.blog.dao" targetProject="src/main/java">
+            <!--在targetPackage的基础上，根据数据库的schema再生成一层package，默认为 false-->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!--5.根据数据库的 table来自动生成-->
+        <table tableName="goods" domainObjectName="Goods" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+
+        <table tableName="goods_order" domainObjectName="GoodsOrder" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="payOrder" domainObjectName="PayOrder" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="refund" domainObjectName="Refund" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+    </context>
+</generatorConfiguration>
