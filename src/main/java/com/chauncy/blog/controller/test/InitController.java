@@ -56,6 +56,7 @@ public class InitController {
 
     /**
      * 测试 Redis Server 是否可用
+     * 关闭防火墙，配置规则中开启相应端口，启动服务
      *
      * @return
      */
@@ -65,5 +66,6 @@ public class InitController {
         String value = redisService.connectTest();
         return AjaxResult.success(value);
     }
+
 
 }
